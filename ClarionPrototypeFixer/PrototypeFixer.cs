@@ -29,12 +29,12 @@ namespace ClarionPrototypeFixer
                 var currentLine = lines[i].ToUpper();
                 if (currentLine.Contains("PROTOTYPE '") || currentLine.Contains("PARAMETERS '"))
                 {
-                    lines[i] = ParsePrototype(lines[i]);
-                    if (FixedLine && currentLine.Contains("PROTOTYPE '"))
+                    
+                    if (currentLine.Contains("PROTOTYPE '"))
                     {
                         lines[i] = lines[i].Remove(lines[i].Length - 1) + ",NAME(''" + lines[i - 1].Substring(5) + "'')'";
                     }
-                    FixedLine = false;
+                    
                     if (lines[i].ToUpper().Contains("PARAMETERS '") && !IsNonCodeFile)
                         break;
                 }
@@ -77,8 +77,8 @@ namespace ClarionPrototypeFixer
 
         private string ParsePrototype(string line)
         {
-            if (Regex.Matches(line.ToUpper(), "ID").Count != 0)
-                line = ParsePrototypeLine(line);
+            //if (Regex.Matches(line.ToUpper(), "ID").Count != 0)
+             //   line = ParsePrototypeLine(line);
             return line;
         }
 
